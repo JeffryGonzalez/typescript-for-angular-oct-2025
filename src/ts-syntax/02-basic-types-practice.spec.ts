@@ -47,7 +47,9 @@ describe('the basic types practice', () => {
     }
 
     getAge(33);
+    // @ts-expect-error 'doesn't allow negatives'
     getAge(-3);
+    // @ts-expect-error 'does not allow zero'
     getAge(0);
 
     const pay = 123.83;
