@@ -12,5 +12,5 @@ npx gitpick JeffryGonzalez/typescript-for-angular-oct-2025/tree/main/src/ts-synt
 ## To Get my Utils
 
 ```sh
-npx gitpick JeffryGonzalez/typescript-for-angular-oct-2025/tree/main/src/shared/utils -o ./src/shares/utils
+npx gitpick JeffryGonzalez/typescript-for-angular-oct-2025/tree/main/src/shared/utils -o ./src/shared/utils
 ```
