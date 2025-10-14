@@ -8,3 +8,9 @@
 ```sh
 npx gitpick JeffryGonzalez/typescript-for-angular-oct-2025/tree/main/src/ts-syntax -o ./src/ts-syntax-instructor
 ```
+
+## To Get my Utils
+
+```sh
+npx gitpick JeffryGonzalez/typescript-for-angular-oct-2025/tree/main/src/shared/utils -o ./src/shares/utils
+```
