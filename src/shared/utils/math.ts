@@ -8,3 +8,7 @@ export function divide<T extends number>(a: number, b: NonZeroNumber<T>) {
   }
   return a / b;
 }
+
+export function isEven(n: number) {
+  return n % 2 === 0;
+}
