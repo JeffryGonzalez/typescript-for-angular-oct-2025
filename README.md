@@ -6,5 +6,5 @@
 2. Run the following in the terminal in VS Code - make sure you are in the `~/class/typecript-for-angular` directory.
 
 ```sh
-npx gitpick jeffrygonzalez/typescript-for-angular-oct-2025/src/ts-syntax -o ./src/ts-syntax-instructor
+npx gitpick JeffryGonzalez/typescript-for-angular-oct-2025/tree/main/src/ts-syntax -o ./src/ts-syntax-instructor
 ```
