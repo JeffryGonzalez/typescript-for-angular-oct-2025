@@ -82,6 +82,8 @@ describe('Type Annotations', () => {
   });
 
   it('Named Types', () => {
+    // you can use two different keywords to declare types in TypeScript. Either is fine. Really.
+
     type Movie = {
       title: string;
       directedBy: string;
@@ -100,5 +102,62 @@ describe('Type Annotations', () => {
     };
 
     logMovieInfo(m2);
+  });
+
+  it('type vs interface', () => {
+    // interfaces are a bit weird, but can do the same thing
+    type MpaaRating = 'G' | 'PG' | 'PG-13' | 'R' | 'NC-17';
+
+    // interface Movie {
+    //   title: string;
+    //   directedBy: string;
+    //   yearReleased: number;
+    //   rating: MpaaRating;
+    //   grossBoxOffice?: number;
+    // }
+
+    // const someMovie: Movie = {
+    //   title: 'Dune',
+    //   directedBy: 'Denis',
+    //   rating: 'PG-13',
+    //   yearReleased: 2022,
+    //   grossBoxOffice: 1800000,
+    // };
+
+    // interface Movie {
+    //   mainStar: string;
+    // }
+
+    type Movie = {
+      title: string;
+      directedBy: string;
+      yearReleased: number;
+      rating: MpaaRating;
+      grossBoxOffice?: number;
+    };
+
+    const someMovie: Movie = {
+      title: 'Dune',
+      directedBy: 'Denis',
+      rating: 'PG-13',
+      yearReleased: 2022,
+      grossBoxOffice: 1800000,
+    };
+
+    // interface MovieWithMainStar extends Movie {
+    //   mainStar: string
+    // }
+    type MovieWithMainStar = Movie & {
+      mainStar: string;
+    };
+
+    type SimplifiedMovie = Omit<Movie, 'rating' | 'grossBoxOffice'>;
+
+    type RatedMovie = Pick<Movie, 'title' | 'rating'>;
+
+    const rm: RatedMovie = {
+      rating: 'G',
+      title: "Pete's Dragon",
+    };
   });
 });
