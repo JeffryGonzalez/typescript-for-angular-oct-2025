@@ -13,4 +13,6 @@ export type Integer<T extends number> = `${T}` extends
 
 export type NonZeroNumber<T extends number> = `${T}` extends '0' ? never : T;
 
-export type Href = `http://${string}` | `https://${string}`;
+export type TlsHref = `https://${string}`;
+export type InsecureHref = `http://${string}`;
+export type Href = TlsHref | InsecureHref;

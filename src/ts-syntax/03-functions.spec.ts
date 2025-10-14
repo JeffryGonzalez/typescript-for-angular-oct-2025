@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, it, expect } from 'vitest';
 
 describe('Some Basic Function Stuff', () => {
@@ -115,11 +116,92 @@ describe('Some Basic Function Stuff', () => {
 
   it('Rest Parameters', () => {
     function add(a: number, b: number, ...rest: number[]) {
-      return rest.reduce((l, r) => l + r, a + b);
+      return rest.reduce((l, r) => l + r, a + b); // add them up
     }
 
     expect(add(2, 2)).toBe(4);
     expect(add(1, 2, 3, 4, 5, 6, 7, 8, 9)).toBe(45);
+  });
+
+  describe('Misc. Stuff You Shoud See', () => {
+    it('Object and Array Spread Operators', () => {
+      // ... spread
+      const person = { name: 'Alice', department: 'QA' };
+
+      const updatedPerson = {
+        // name: person.name,
+        // department: person.department,
+        ...person,
+        pay: 120000,
+      };
+
+      expect(updatedPerson).toEqual({
+        name: 'Alice',
+        department: 'QA',
+        pay: 120_000,
+      });
+
+      const numbers = [1, 2, 3];
+      const moreNumbers = [4, 5, 6];
+      const arrayOfArrays = [numbers, moreNumbers];
+      const spreadNumbers = [...numbers, ...moreNumbers];
+      expect(arrayOfArrays).toEqual([
+        [1, 2, 3],
+        [4, 5, 6],
+      ]);
+      expect(spreadNumbers).toEqual([1, 2, 3, 4, 5, 6]);
+    });
+  });
+
+  it('dealing with uncertainty', () => {
+    type Employee = {
+      name: {
+        first: string;
+        last: string;
+        mi?: string;
+      };
+      address?: {
+        street: string;
+        zip: string;
+      };
+      contactMechanisms: {
+        phones: string[];
+        emails: string[];
+      };
+    };
+
+    const bob: Employee = {
+      name: {
+        first: 'Robert',
+        last: 'Smith',
+      },
+
+      contactMechanisms: {
+        phones: ['555-1212', '867-5309'],
+        emails: ['bob@aol.com'],
+      },
+    };
+
+    expect(bob.name.last).toBe('Smith');
+    expect(bob.contactMechanisms.emails[0]).toBe('bob@aol.com');
+
+    const zip = bob.address?.zip ?? 'No Known Zip'; // null chaining operator, aka "elvis operator"
+    expect(zip).toBe('No Known Zip');
+  });
+
+  it('Arrow Functions that return objects', () => {
+    const add = (a: number, b: number) => a + b;
+    const createUser = (name: string, department: string) => ({
+      name,
+      dep: department,
+    });
+
+    const jill = createUser('Jill', 'DEV');
+
+    expect(jill).toEqual({
+      name: 'Jill',
+      dep: 'DEV',
+    });
   });
 });
 
