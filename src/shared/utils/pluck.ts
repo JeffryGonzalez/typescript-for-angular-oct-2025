@@ -10,6 +10,6 @@ export function pluck<T, K extends keyof T>(obj: T, ...keys: K[]) {
         [current]: obj[current],
       };
     },
-    {} as Prettify<Pick<T, K>>,
+    {} as Prettify<Pick<T, K>>, //TODO: Show without the Prettify
   );
 }
