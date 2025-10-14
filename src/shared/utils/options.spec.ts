@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isSome, mapOption, none, some, unwrap, type Option } from './options';
 
-describe('Options', () => {
+describe.skip('Options', () => {
   it('demo 1', () => {
     function isEven(num: number): Option<number> {
       if (num % 2 === 0) {

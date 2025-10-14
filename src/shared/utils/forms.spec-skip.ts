@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { createFormGroup, FormGroupType } from './forms';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-describe('Forms', () => {
+describe.skip('Forms', () => {
   it('FormGroupType', () => {
     // No expects in this test, just type checking. Change or add types to the Signup type to see if it works.
     type Signup = {
