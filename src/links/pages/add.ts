@@ -7,10 +7,14 @@ import {
 } from '@angular/forms';
 import { LinksStore } from '../stores/links';
 import { ApiLinkCreateItem } from '../types';
+import { JsonPipe } from '@angular/common';
+import { createFormGroup, FormGroupType } from '../../shared/utils/forms';
+
+type ApiLinkCreateItemFormThing = FormGroupType<ApiLinkCreateItem>;
 @Component({
   selector: 'app-link-add',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, JsonPipe],
   template: `
     <div class="max-w-md mx-auto mt-8">
       <div class="card bg-base-100 shadow-xl">
@@ -115,6 +119,7 @@ import { ApiLinkCreateItem } from '../types';
           </form>
         </div>
       </div>
+      <pre>{{ form.value | json }}</pre>
     </div>
   `,
   styles: ``,
@@ -122,17 +127,16 @@ import { ApiLinkCreateItem } from '../types';
 export class Add {
   isSubmitting = false;
 
-  form = new FormGroup({
-    title: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(100)],
-    }),
-    description: new FormControl('', { nonNullable: true }),
-    link: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/^https?:\/\/.+/)],
-    }),
-  });
+  defaults: ApiLinkCreateItem = {
+    title: '',
+    link: 'https://',
+    description: 'Description Goes Here',
+  };
+  form = createFormGroup(this.defaults);
+
+  constructor() {
+    this.form.controls.title.addValidators(Validators.required); // etc. etc
+  }
 
   store = inject(LinksStore);
 

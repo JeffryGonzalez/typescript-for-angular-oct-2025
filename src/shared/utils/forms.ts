@@ -13,6 +13,7 @@ import { Prettify } from './prettify';
 
 */
 
+// mapped type - it is a loop, it's going to take a type of one kind <T> and turn into the same thing, but all the properties will be FormControls or FormGroups
 export type FormGroupType<T> = {
   [K in keyof T]: T[K] extends object
     ? FormGroup<Prettify<FormGroupType<T[K]>>>

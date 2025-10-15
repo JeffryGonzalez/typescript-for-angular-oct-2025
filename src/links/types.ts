@@ -10,7 +10,9 @@ export const ApiLinkItemSchema = z.object({
 
 export type ApiLinkItem = z.infer<typeof ApiLinkItemSchema>;
 
-export const ApiLinksResponseSchema = z.array(ApiLinkItemSchema);
+export const ApiLinksResponseSchema = z.object({
+  links: z.array(ApiLinkItemSchema),
+});
 
 export type ApiLinkResponse = z.infer<typeof ApiLinksResponseSchema>;
 

@@ -22,6 +22,7 @@ import { ApiLinkCreateItem, ApiLinkItem, SortingOptions } from '../types';
 import { withLinkSorting } from './link-sorting-feature';
 import { injectDispatch } from '@ngrx/signals/events';
 import { applicationErrorEvents } from '../../shared/errors/stores/errors';
+import { isSuccess } from '../../shared/utils/results';
 
 export const LinksStore = signalStore(
   withRequestStatus(),
@@ -54,7 +55,18 @@ export const LinksStore = signalStore(
           exhaustMap(() =>
             api.getLinks().pipe(
               tapResponse({
-                next: (r) => patchState(state, setEntities(r), setFulfilled()),
+                next: (r) => {
+                  if (isSuccess(r)) {
+                    patchState(
+                      state,
+                      setEntities(r.value.links),
+                      setFulfilled(),
+                    );
+                  } else {
+                    errorEvents.setError({ error: r.error.error });
+                    patchState(state, setFulfilled());
+                  }
+                },
                 error: () =>
                   errorEvents.setError({
                     error: 'Could Not Load Your Links. Sorry.',

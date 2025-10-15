@@ -6,7 +6,7 @@ const Articles = {
   links: [
     {
       id: '1',
-      titler: 'Angular Documentation',
+      title: 'Angular Documentation',
       description: 'Comprehensive guide to Angular framework.',
       link: 'https://angular.dev/',
       added: '2025-08-18T17:14:10.029Z',
@@ -119,6 +119,6 @@ export const articlesHandlers = [
     // throw new HttpResponse({
     //   status: 404,
     // });
-    return HttpResponse.json(Articles.links);
+    return HttpResponse.json(Articles);
   }),
 ];

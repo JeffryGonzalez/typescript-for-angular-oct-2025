@@ -1,31 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { failed, Results, succeeded } from '../../shared/utils/results';
 import {
   ApiLinkCreateItem,
   ApiLinkItem,
   ApiLinkResponse,
   ApiLinksResponseSchema,
 } from '../types';
-import { catchError, map } from 'rxjs';
 
 export class LinksApi {
   private readonly client = inject(HttpClient);
 
-  getLinks() {
+  getLinks(): Observable<Results<ApiLinkResponse, { error: string }>> {
     return this.client
       .get<ApiLinkResponse>('https://api.some-fake-server.com/links')
       .pipe(
         map((r) => {
-          // two ways - here's the first - STRICT
-          // Throw an error - like blow up if this happens.
-          // const data = ApiLinksResponseSchema.parse(r);
-          // return data;
           const validationResults = ApiLinksResponseSchema.safeParse(r);
           if (validationResults.success) {
-            return validationResults.data;
+            return succeeded(validationResults.data);
           } else {
+            // send a notification to the support people, whatever
             console.error(validationResults.error);
-            return [];
+            return failed({
+              error:
+                'There were problems with the API - Sorry - Not my issue, but we are working on it',
+            });
           }
         }),
       );
