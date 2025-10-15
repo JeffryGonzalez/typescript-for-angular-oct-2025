@@ -2,9 +2,12 @@ import { computed, Signal } from '@angular/core';
 
 export function fizzBuzz(current: number) {
   if (interpretZeroAsNothing(current)) {
-    return '';
+    return 'None';
   }
   // DRY - don't repeat yourself - RUG - repeat until good.
+  if (current === 8) {
+    return 'WINNER!';
+  }
   if (isFizzBuzz(current)) {
     return 'FizzBuzz';
   }
@@ -14,7 +17,7 @@ export function fizzBuzz(current: number) {
   if (isBuzz(current)) {
     return 'Buzz';
   }
-  return '';
+  return 'None';
 }
 function interpretZeroAsNothing(current: number) {
   return current === 0;
