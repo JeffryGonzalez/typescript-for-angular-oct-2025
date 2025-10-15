@@ -14,7 +14,7 @@ import {
 } from '@angular-architects/ngrx-toolkit';
 import { withFizzBuzz } from './fizz-buzz-feature';
 
-const CountByValues = [1, 3, 5] as const;
+const CountByValues = [1, 3, 5, 7] as const;
 export type CountByValue = (typeof CountByValues)[number];
 
 type CounterState = {

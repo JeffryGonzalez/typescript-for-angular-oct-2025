@@ -24,7 +24,7 @@ describe('Discrimated Unions', () => {
       return current + getPayFor(next);
     }, 0);
 
-    expect(totalPay).toBe(999);
+    expect(totalPay).toBe(200000);
   });
 });
 

@@ -1,12 +1,12 @@
 import { delay, http, HttpResponse } from 'msw';
 
-import { ApiLinkCreateItem, ApiLinkItem } from '../links/types';
+import { ApiLinkCreateItem } from '../links/types';
 
 const Articles = {
   links: [
     {
       id: '1',
-      title: 'Angular Documentation',
+      titler: 'Angular Documentation',
       description: 'Comprehensive guide to Angular framework.',
       link: 'https://angular.dev/',
       added: '2025-08-18T17:14:10.029Z',
@@ -95,7 +95,7 @@ export const articlesHandlers = [
       ...sentData,
     };
 
-    Articles.links.push(newItem);
+    //Articles.links.push(newItem);
 
     return HttpResponse.json(newItem);
   }),
@@ -119,6 +119,6 @@ export const articlesHandlers = [
     // throw new HttpResponse({
     //   status: 404,
     // });
-    return HttpResponse.json(Articles);
+    return HttpResponse.json(Articles.links);
   }),
 ];
