@@ -29,6 +29,11 @@ export const routes: Routes = [
       import('../books/books.routes').then((b) => b.BOOKS_ROUTES),
   },
   {
+    path: 'customers',
+    loadChildren: () =>
+      import('../customers/customers.routes').then((r) => r.CUSTOMERS_LINKS),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },

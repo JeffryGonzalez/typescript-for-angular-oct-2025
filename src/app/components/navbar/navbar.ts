@@ -56,5 +56,9 @@ export class Navbar {
       label: 'Support',
       path: '/support',
     },
+    {
+      label: 'Customers',
+      path: '/customers',
+    },
   ]);
 }
